@@ -1,0 +1,16 @@
+const response = pm.response.json();
+
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+console.log("Temperature is: " + response.main.temp)
+pm.test("Verify if temperature is hot", () =>{
+    pm.expect(response.main.temp).to.be.above(20)
+    console.log("Weather is deemed not cold. Before embarking on the trip, pack swimmers")
+});
+
+pm.test("Verify if temperature is cold", () =>{
+    pm.expect(response.main.temp).to.be.below(20)
+    console.log("Weather is deemed cold. Before embarking on the trip, pack woollens")
+});
